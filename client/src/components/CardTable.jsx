@@ -282,7 +282,7 @@ export const CardTable = () => {
             className="w-6 h-9 sm:w-8 sm:h-11 rounded-md card-back-ornate border border-amber-400/50 shadow-md animate-deal-card"
             style={{
               transform: `rotate(${(i - Math.floor(cardsToShow / 2)) * 3}deg)`,
-              animationDelay: `${i * 30}ms`,
+              animationDelay: `${i * 120}ms`,
             }}
           />
         ))}
@@ -977,7 +977,7 @@ export const CardTable = () => {
                   <div
                     key={idx}
                     className="animate-deal-card shrink-0"
-                    style={{ animationDelay: `${idx * 35}ms` }}
+                    style={{ animationDelay: `${idx * 120}ms` }}
                   >
                     <PlayingCard
                       isFaceUp={false}
