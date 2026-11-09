@@ -3,6 +3,7 @@ import { useSocket } from '../context/SocketContext';
 import { PlayerSeat } from './PlayerSeat';
 import { AnimatedCharacterAvatar } from './character-avatars';
 import { PLAYABLE_CHARACTERS } from '../data/characters';
+import { enterGameFullscreen } from '../utils/gameDisplay';
 import { Users, Copy, Link2, Play, CheckCircle2, Crown, LogOut, Sparkles } from 'lucide-react';
 
 export const LobbyScreen = () => {
@@ -195,7 +196,7 @@ export const LobbyScreen = () => {
         {isHost ? (
           <div className="w-full sm:w-auto flex-1 flex flex-col items-center">
             <button
-              onClick={startGamePreview}
+              onClick={() => { enterGameFullscreen(); startGamePreview(); }}
               disabled={!canStart}
               className={`w-full flex items-center justify-center gap-2.5 px-6 py-3.5 rounded-2xl text-sm font-black tracking-wider uppercase transition-all shadow-xl active:scale-[0.98] cursor-pointer ${
                 canStart
