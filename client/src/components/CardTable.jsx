@@ -94,6 +94,18 @@ export const CardTable = () => {
     closeSettings,
   } = useSoundSettings();
 
+
+  // Request landscape while the game table is open (supported on Android fullscreen/PWA browsers).
+  useEffect(() => {
+    const orientation = window.screen?.orientation;
+    if (orientation?.lock) {
+      orientation.lock('landscape').catch(() => {});
+    }
+    return () => {
+      try { orientation?.unlock?.(); } catch {}
+    };
+  }, []);
+
   if (!roomState) return null;
 
   // Local player's seat index (default 0)

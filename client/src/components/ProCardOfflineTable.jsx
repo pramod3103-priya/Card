@@ -50,6 +50,18 @@ const STAGES = [
 export const ProCardOfflineTable = ({ chosenCharacterId, gameTarget = 31, onExit }) => {
   const { humanCharacter, botOpponents, allSeats } = assignOfflineSeats(chosenCharacterId);
 
+
+  // Request landscape while the game table is open (supported on Android fullscreen/PWA browsers).
+  useEffect(() => {
+    const orientation = window.screen?.orientation;
+    if (orientation?.lock) {
+      orientation.lock('landscape').catch(() => {});
+    }
+    return () => {
+      try { orientation?.unlock?.(); } catch {}
+    };
+  }, []);
+
   // Game Engine State
   const [stage, setStage] = useState('first_deal');
   const [dealerSeatIndex, setDealerSeatIndex] = useState(0); // Dealer is Seat 0 initially
@@ -1272,11 +1284,6 @@ export const ProCardOfflineTable = ({ chosenCharacterId, gameTarget = 31, onExit
 
         {/* 1. TOP (North): Bot 2 */}
         <div className="absolute top-3 sm:top-6 z-20 flex flex-col items-center gap-1">
-          {botDialogues[2] && (
-            <div className="px-3 py-1 rounded-xl bg-slate-950/90 border border-amber-400/60 text-amber-200 text-xs italic font-serif shadow-lg animate-bounce max-w-[220px] text-center">
-              "{botDialogues[2]}"
-            </div>
-          )}
           <div className="flex items-center gap-2">
             <OfflineSeatCard
               seat={allSeats[2]}
@@ -1296,11 +1303,6 @@ export const ProCardOfflineTable = ({ chosenCharacterId, gameTarget = 31, onExit
 
         {/* 2. LEFT (West): Bot 1 */}
         <div className="absolute left-2 sm:left-6 z-20 flex flex-col items-center gap-1">
-          {botDialogues[1] && (
-            <div className="px-3 py-1 rounded-xl bg-slate-950/90 border border-amber-400/60 text-amber-200 text-xs italic font-serif shadow-lg animate-bounce max-w-[180px] text-center">
-              "{botDialogues[1]}"
-            </div>
-          )}
           <div className="flex items-center gap-2">
             <OfflineSeatCard
               seat={allSeats[1]}
@@ -1320,11 +1322,6 @@ export const ProCardOfflineTable = ({ chosenCharacterId, gameTarget = 31, onExit
 
         {/* 3. RIGHT (East): Bot 3 */}
         <div className="absolute right-2 sm:right-6 z-20 flex flex-col items-center gap-1">
-          {botDialogues[3] && (
-            <div className="px-3 py-1 rounded-xl bg-slate-950/90 border border-amber-400/60 text-amber-200 text-xs italic font-serif shadow-lg animate-bounce max-w-[180px] text-center">
-              "{botDialogues[3]}"
-            </div>
-          )}
           <div className="flex items-center gap-2">
             <OfflineSeatCard
               seat={allSeats[3]}
@@ -1695,12 +1692,6 @@ function OfflineSeatCard({
       }`}
     >
       {/* Active Turn Glowing Pill */}
-      {isCurrentTurn && (
-        <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-2.5 py-0.5 rounded-full bg-gradient-to-r from-amber-400 via-yellow-300 to-amber-500 text-slate-950 text-[9px] font-black uppercase tracking-wider flex items-center gap-1 shadow-lg z-30 animate-bounce">
-          <Zap className="w-2.5 h-2.5 fill-slate-950" />
-          <span>{isYou ? 'YOUR TURN' : 'ACTIVE TURN'}</span>
-        </div>
-      )}
 
       {/* 3D Animated Character Avatar */}
       <AnimatedCharacterAvatar
