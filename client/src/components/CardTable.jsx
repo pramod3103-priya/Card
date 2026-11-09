@@ -455,7 +455,7 @@ export const CardTable = () => {
 
         <button type="button" onClick={enterGameFullscreen} title="Enter Full Screen" className="px-2.5 py-1.5 rounded-xl bg-slate-900 border border-amber-500/40 text-amber-300 text-[10px] font-bold">Full Screen</button>
 
-        {/* Action Controls */>
+        {/* Action Controls */}
         <div className="flex items-center gap-2">
           {/* Direct Quick Mute/Unmute Button */}
           <button
