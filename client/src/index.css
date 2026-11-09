@@ -1,0 +1,195 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    color-scheme: dark;
+  }
+
+  body {
+    margin: 0;
+    padding: 0;
+    background-color: #09090b;
+    color: #f1f5f9;
+    font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  .font-serif {
+    font-family: 'Cinzel', Georgia, serif;
+  }
+
+  .font-mono {
+    font-family: 'JetBrains Mono', monospace;
+  }
+}
+
+/* Charcoal / Slate Chess-Inspired Table Surface */
+.casino-felt {
+  background-color: #0f172a;
+  background-image: 
+    radial-gradient(circle at 50% 45%, rgba(30, 41, 59, 0.95) 0%, rgba(15, 23, 42, 0.98) 55%, rgba(2, 6, 23, 1) 100%),
+    radial-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+  background-size: 100% 100%, 8px 8px;
+}
+
+/* Sleek Dark Charcoal Leather Rail */
+.casino-rail {
+  background: linear-gradient(145deg, #18181b, #09090b, #18181b);
+  box-shadow: 
+    inset 0 2px 6px rgba(245, 158, 11, 0.15),
+    inset 0 -4px 10px rgba(0, 0, 0, 0.9),
+    0 12px 30px rgba(0, 0, 0, 0.8);
+  border: 2px solid #27272a;
+}
+
+/* Steel & Amber Trim Divider */
+.casino-trim {
+  border: 1.5px solid rgba(245, 158, 11, 0.35);
+  box-shadow: 
+    0 0 8px rgba(245, 158, 11, 0.15),
+    inset 0 0 8px rgba(245, 158, 11, 0.15);
+}
+
+/* Realistic Playing Card Styling */
+.card-face {
+  background: linear-gradient(135deg, #fdfbf7 0%, #f4ede2 100%);
+  box-shadow: 
+    0 2px 5px rgba(0, 0, 0, 0.25),
+    0 8px 24px rgba(0, 0, 0, 0.35),
+    inset 0 0 0 1px rgba(0, 0, 0, 0.08);
+  transition: transform 0.25s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.25s ease, z-index 0.25s ease;
+}
+
+.card-face:hover {
+  box-shadow: 
+    0 12px 28px rgba(0, 0, 0, 0.5),
+    0 0 15px rgba(250, 204, 21, 0.4);
+}
+
+/* Ornate Casino Card Back */
+.card-back-ornate {
+  background: 
+    radial-gradient(circle at center, #991b1b 0%, #450a0a 80%),
+    repeating-linear-gradient(45deg, rgba(234, 179, 8, 0.15) 0px, rgba(234, 179, 8, 0.15) 2px, transparent 2px, transparent 6px),
+    repeating-linear-gradient(-45deg, rgba(234, 179, 8, 0.15) 0px, rgba(234, 179, 8, 0.15) 2px, transparent 2px, transparent 6px);
+  border: 2px solid rgba(234, 179, 8, 0.6);
+  box-shadow: 
+    0 3px 8px rgba(0, 0, 0, 0.4),
+    0 10px 25px rgba(0, 0, 0, 0.5),
+    inset 0 0 0 2px rgba(234, 179, 8, 0.3);
+}
+
+/* Card Fan Animations */
+@keyframes cardFloat {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-8px) rotate(1deg); }
+}
+
+@keyframes pulseGlow {
+  0%, 100% { opacity: 0.6; filter: drop-shadow(0 0 8px rgba(234, 179, 8, 0.4)); }
+  50% { opacity: 1; filter: drop-shadow(0 0 16px rgba(234, 179, 8, 0.8)); }
+}
+
+@keyframes dealIn {
+  from {
+    opacity: 0;
+    transform: translateY(40px) scale(0.85);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes dealFromDeck {
+  0% {
+    opacity: 0;
+    transform: translateY(60px) scale(0.4) rotate(-12deg);
+  }
+  70% {
+    opacity: 1;
+    transform: translateY(-8px) scale(1.04) rotate(2deg);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1) rotate(0deg);
+  }
+}
+
+@keyframes playCardIn {
+  0% {
+    opacity: 0;
+    transform: translateY(50px) scale(0.6) rotate(-8deg);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+  }
+  65% {
+    transform: translateY(-6px) scale(1.08) rotate(2deg);
+    box-shadow: 0 20px 35px rgba(245, 158, 11, 0.35);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1) rotate(0deg);
+    box-shadow: 0 8px 22px rgba(0, 0, 0, 0.55);
+  }
+}
+
+@keyframes winnerPulse {
+  0%, 100% {
+    transform: scale(1.06);
+    box-shadow: 0 0 25px rgba(245, 158, 11, 0.9), 0 0 50px rgba(245, 158, 11, 0.5);
+  }
+  50% {
+    transform: scale(1.12);
+    box-shadow: 0 0 40px rgba(245, 158, 11, 1), 0 0 75px rgba(245, 158, 11, 0.8);
+  }
+}
+
+@keyframes collectCards {
+  0% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0.3) translateY(var(--collect-y, 0px)) translateX(var(--collect-x, 0px));
+  }
+}
+
+.animate-card-float {
+  animation: cardFloat 6s ease-in-out infinite;
+}
+
+.animate-pulse-glow {
+  animation: pulseGlow 3s ease-in-out infinite;
+}
+
+.animate-deal-in {
+  animation: dealIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-deal-card {
+  animation: dealFromDeck 0.5s cubic-bezier(0.18, 0.89, 0.32, 1.25) backwards;
+}
+
+.animate-card-played {
+  animation: playCardIn 0.45s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+}
+
+.animate-winner-pulse {
+  animation: winnerPulse 1.4s ease-in-out infinite;
+}
+
+.animate-collect {
+  animation: collectCards 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+/* Custom Scrollbars */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}

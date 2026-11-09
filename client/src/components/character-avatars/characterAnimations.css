@@ -1,0 +1,225 @@
+/* PRO CARD Animated Character Avatar Keyframes & Transitions */
+
+@keyframes charBreathe {
+  0%, 100% {
+    transform: translateY(0) scale(1);
+  }
+  50% {
+    transform: translateY(-1.5%) scale(1.015);
+  }
+}
+
+@keyframes charBlink {
+  0%, 92%, 100% {
+    transform: scaleY(1);
+  }
+  94%, 96% {
+    transform: scaleY(0.1);
+  }
+}
+
+@keyframes charThinkTilt {
+  0%, 100% {
+    transform: rotate(0deg) translateY(0);
+  }
+  30% {
+    transform: rotate(-2.5deg) translateY(-2px);
+  }
+  70% {
+    transform: rotate(2deg) translateY(-1px);
+  }
+}
+
+@keyframes charThinkPulse {
+  0%, 100% {
+    box-shadow: 0 0 15px rgba(245, 158, 11, 0.4), inset 0 0 10px rgba(245, 158, 11, 0.2);
+    border-color: rgba(245, 158, 11, 0.6);
+  }
+  50% {
+    box-shadow: 0 0 35px rgba(245, 158, 11, 0.9), 0 0 15px rgba(251, 191, 36, 0.6), inset 0 0 18px rgba(245, 158, 11, 0.4);
+    border-color: rgba(251, 191, 36, 1);
+  }
+}
+
+@keyframes charVoiceWave {
+  0% {
+    transform: scale(0.95);
+    opacity: 0.9;
+  }
+  50% {
+    transform: scale(1.15);
+    opacity: 0.4;
+  }
+  100% {
+    transform: scale(1.3);
+    opacity: 0;
+  }
+}
+
+@keyframes charSpeakJaw {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(2px);
+  }
+}
+
+@keyframes charCelebrate {
+  0%, 100% {
+    transform: translateY(0) scale(1) rotate(0deg);
+  }
+  20% {
+    transform: translateY(-8%) scale(1.08) rotate(-3deg);
+  }
+  40% {
+    transform: translateY(-10%) scale(1.1) rotate(3deg);
+  }
+  60% {
+    transform: translateY(-5%) scale(1.06) rotate(-2deg);
+  }
+  80% {
+    transform: translateY(-2%) scale(1.03) rotate(1deg);
+  }
+}
+
+@keyframes charSparkleSpin {
+  0% {
+    transform: rotate(0deg) scale(0.8);
+    opacity: 0.4;
+  }
+  50% {
+    transform: rotate(180deg) scale(1.2);
+    opacity: 1;
+  }
+  100% {
+    transform: rotate(360deg) scale(0.8);
+    opacity: 0.4;
+  }
+}
+
+@keyframes charDisappointSlump {
+  0%, 100% {
+    transform: translateY(3%) scale(0.97) rotate(1.5deg);
+    filter: brightness(0.85) saturate(0.85);
+  }
+  50% {
+    transform: translateY(4.5%) scale(0.96) rotate(1deg);
+    filter: brightness(0.8) saturate(0.8);
+  }
+}
+
+@keyframes charTearDrop {
+  0% {
+    transform: translateY(0) scale(0);
+    opacity: 0;
+  }
+  20% {
+    transform: translateY(2px) scale(1);
+    opacity: 0.9;
+  }
+  80% {
+    transform: translateY(12px) scale(0.8);
+    opacity: 0.7;
+  }
+  100% {
+    transform: translateY(18px) scale(0.3);
+    opacity: 0;
+  }
+}
+
+@keyframes arcPulseCyan {
+  0%, 100% {
+    filter: drop-shadow(0 0 4px #06b6d4) drop-shadow(0 0 8px #38bdf8);
+    opacity: 0.9;
+  }
+  50% {
+    filter: drop-shadow(0 0 10px #22d3ee) drop-shadow(0 0 18px #0ea5e9);
+    opacity: 1;
+  }
+}
+
+@keyframes hudScanLine {
+  0% {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  50% {
+    opacity: 0.6;
+  }
+  100% {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+}
+
+/* Base utility classes */
+.char-anim-idle {
+  animation: charBreathe 3.5s ease-in-out infinite;
+  transform-origin: center bottom;
+}
+
+.char-anim-thinking {
+  animation: charThinkTilt 2.5s ease-in-out infinite;
+  transform-origin: center bottom;
+}
+
+.char-anim-speaking {
+  animation: charBreathe 1.8s ease-in-out infinite;
+  transform-origin: center bottom;
+}
+
+.char-anim-celebrating {
+  animation: charCelebrate 1.4s ease-in-out infinite;
+  transform-origin: center bottom;
+}
+
+.char-anim-disappointed {
+  animation: charDisappointSlump 3s ease-in-out infinite;
+  transform-origin: center bottom;
+}
+
+.char-blink {
+  animation: charBlink 4s ease-in-out infinite;
+  transform-origin: center;
+}
+
+.char-arc-glow {
+  animation: arcPulseCyan 2s ease-in-out infinite;
+}
+
+.char-sparkle-active {
+  animation: charSparkleSpin 3s linear infinite;
+}
+
+.char-tear-anim {
+  animation: charTearDrop 2.2s ease-in infinite;
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .char-anim-idle,
+  .char-anim-thinking,
+  .char-anim-speaking,
+  .char-anim-celebrating,
+  .char-anim-disappointed,
+  .char-blink,
+  .char-arc-glow,
+  .char-sparkle-active,
+  .char-tear-anim {
+    animation: none !important;
+  }
+}
+
+.reduced-motion .char-anim-idle,
+.reduced-motion .char-anim-thinking,
+.reduced-motion .char-anim-speaking,
+.reduced-motion .char-anim-celebrating,
+.reduced-motion .char-anim-disappointed,
+.reduced-motion .char-blink,
+.reduced-motion .char-arc-glow,
+.reduced-motion .char-sparkle-active,
+.reduced-motion .char-tear-anim {
+  animation: none !important;
+}
+

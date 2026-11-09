@@ -1,0 +1,22 @@
+{
+  "name": "procard-server",
+  "version": "1.0.0",
+  "description": "Authoritative backend and Socket.IO server for PRO CARD multiplayer card game",
+  "main": "server.js",
+  "type": "module",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js",
+    "test": "node tests/multiplayer.test.js && node tests/four_sessions.test.js && node tests/deck_and_dealing.test.js && node tests/eight_stages_gameplay.test.js && node tests/dealer_bidding_order.test.js && node tests/progressive_bidding_trump.test.js && node tests/offline_character_bots.test.js && node tests/flexible_bid_increase.test.js && node tests/voice_chat_signaling.test.js && node tests/card_play_and_table_ui.test.js && node tests/scoreboard_and_history.test.js && node tests/sound_effects_and_settings.test.js && node tests/animated_characters_and_table.test.js && node tests/advanced_bidding_timer.test.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "socket.io": "^4.8.1"
+  },
+  "devDependencies": {
+    "socket.io-client": "^4.8.1"
+  }
+}
+
