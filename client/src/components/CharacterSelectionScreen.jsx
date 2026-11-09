@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { PLAYABLE_CHARACTERS, assignOfflineSeats } from '../data/characters';
+import { enterGameFullscreen } from '../utils/gameDisplay';
 import { AnimatedCharacterAvatar } from './character-avatars';
 import { Bot, User, Check, Play, ArrowLeft, Sparkles, Target, Shield, Zap } from 'lucide-react';
 
@@ -10,6 +11,7 @@ export const CharacterSelectionScreen = ({ onStartOfflineMatch, onBackToMultipla
   const { humanCharacter, botOpponents } = assignOfflineSeats(selectedCharId);
 
   const handleStart = () => {
+    enterGameFullscreen();
     onStartOfflineMatch({
       chosenCharacterId: selectedCharId,
       gameTarget,
