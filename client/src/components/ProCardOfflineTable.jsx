@@ -8,6 +8,7 @@ import {
   dealProgressiveBatches,
 } from '../bot/offlineGameEngine';
 import { PlayingCard } from './PlayingCard';
+import { enterGameFullscreen } from '../utils/gameDisplay';
 import { ScoreboardModal } from './ScoreboardModal';
 import { MatchWinnerModal } from './MatchWinnerModal';
 import { SettingsModal } from './SettingsModal';
@@ -51,15 +52,12 @@ export const ProCardOfflineTable = ({ chosenCharacterId, gameTarget = 31, onExit
   const { humanCharacter, botOpponents, allSeats } = assignOfflineSeats(chosenCharacterId);
 
 
-  // Request landscape while the game table is open (supported on Android fullscreen/PWA browsers).
+  // Re-apply landscape lock after fullscreen is granted by the browser.
   useEffect(() => {
-    const orientation = window.screen?.orientation;
-    if (orientation?.lock) {
-      orientation.lock('landscape').catch(() => {});
-    }
-    return () => {
-      try { orientation?.unlock?.(); } catch {}
-    };
+    const lock = () => window.screen?.orientation?.lock?.('landscape').catch(() => {});
+    document.addEventListener('fullscreenchange', lock);
+    lock();
+    return () => document.removeEventListener('fullscreenchange', lock);
   }, []);
 
   // Game Engine State
@@ -937,7 +935,7 @@ export const ProCardOfflineTable = ({ chosenCharacterId, gameTarget = 31, onExit
   );
 
   return (
-    <div className="flex-1 flex flex-col items-center justify-between p-2 sm:p-4 lg:p-6 w-full max-w-7xl mx-auto relative select-none">
+    <div className="game-table-viewport flex flex-col items-center justify-between p-1 sm:p-2 w-full relative select-none">
       {/* Simultaneous Pradhan Announcement Overlay */}
       <PradhanAnnouncementOverlay
         announcement={offlinePradhanAnnouncement}
@@ -988,7 +986,9 @@ export const ProCardOfflineTable = ({ chosenCharacterId, gameTarget = 31, onExit
           />
         )}
 
-        {/* Action Controls */}
+        <button type="button" onClick={enterGameFullscreen} title="Enter Full Screen" className="px-2.5 py-1.5 rounded-xl bg-slate-900 border border-amber-500/40 text-amber-300 text-[10px] font-bold">Full Screen</button>
+
+        {/* Action Controls */>
         <div className="flex items-center gap-2">
           {/* Direct Quick Mute/Unmute Button */}
           <button
