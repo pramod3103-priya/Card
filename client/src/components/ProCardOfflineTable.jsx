@@ -923,6 +923,19 @@ export const ProCardOfflineTable = ({ chosenCharacterId, gameTarget = 31, onExit
   const humanHand = playerHands[0] || [];
   const expectedCount = getSeatCardCount();
 
+  // Face-down cards animate into each bot's hand one by one.
+  const renderOfflineOpponentFan = (count) => (
+    <div className="flex items-center justify-center -space-x-3 py-1 pointer-events-none select-none">
+      {Array.from({ length: Math.min(count, 7) }).map((_, index) => (
+        <div
+          key={index}
+          className="w-5 h-7 sm:w-6 sm:h-9 rounded-md card-back-ornate border border-amber-400/50 shadow-md animate-deal-card shrink-0"
+          style={{ animationDelay: `${index * 120}ms` }}
+        />
+      ))}
+    </div>
+  );
+
   return (
     <div className="flex-1 flex flex-col items-center justify-between p-2 sm:p-4 lg:p-6 w-full max-w-7xl mx-auto relative select-none">
       {/* Simultaneous Pradhan Announcement Overlay */}
@@ -1298,6 +1311,7 @@ export const ProCardOfflineTable = ({ chosenCharacterId, gameTarget = 31, onExit
               isTrickWinner={lastTrickResult?.winnerSeatIndex === 2}
               isTrickLoser={lastTrickResult && lastTrickResult.winnerSeatIndex !== 2}
             />
+            {renderOfflineOpponentFan(expectedCount)}
           </div>
         </div>
 
@@ -1317,6 +1331,7 @@ export const ProCardOfflineTable = ({ chosenCharacterId, gameTarget = 31, onExit
               isTrickWinner={lastTrickResult?.winnerSeatIndex === 1}
               isTrickLoser={lastTrickResult && lastTrickResult.winnerSeatIndex !== 1}
             />
+            {renderOfflineOpponentFan(expectedCount)}
           </div>
         </div>
 
@@ -1336,6 +1351,7 @@ export const ProCardOfflineTable = ({ chosenCharacterId, gameTarget = 31, onExit
               isTrickWinner={lastTrickResult?.winnerSeatIndex === 3}
               isTrickLoser={lastTrickResult && lastTrickResult.winnerSeatIndex !== 3}
             />
+            {renderOfflineOpponentFan(expectedCount)}
           </div>
         </div>
 
@@ -1557,7 +1573,7 @@ export const ProCardOfflineTable = ({ chosenCharacterId, gameTarget = 31, onExit
               <div
                 key={card.id || idx}
                 className="animate-deal-card shrink-0 transition-transform duration-200"
-                style={{ animationDelay: `${idx * 35}ms` }}
+                style={{ animationDelay: `${idx * 120}ms` }}
               >
                 <PlayingCard
                   rank={card.rank}
