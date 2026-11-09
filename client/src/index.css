@@ -193,3 +193,33 @@
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
+
+
+/* Edge-to-edge game mode: lock the viewport so the table cannot drift or scroll. */
+html, body, #root { width: 100%; min-height: 100%; margin: 0; }
+body:has(.game-fullscreen-root) { overflow: hidden !important; overscroll-behavior: none; }
+.game-fullscreen-root {
+  position: fixed; inset: 0; width: 100vw; height: 100vh; height: 100dvh;
+  min-height: 0; max-width: none; margin: 0; padding: 0; overflow: hidden;
+  display: flex; flex-direction: column; z-index: 999;
+}
+.game-fullscreen-main {
+  flex: 1 1 auto; width: 100%; height: 100%; min-height: 0; min-width: 0;
+  overflow: hidden; position: relative; display: flex; flex-direction: column;
+}
+.game-table-viewport {
+  position: relative; width: 100%; max-width: none; height: 100%; min-height: 0;
+  min-width: 0; flex: 1 1 auto; overflow: hidden; box-sizing: border-box;
+  margin: 0; padding: clamp(3px, 0.8vh, 8px); gap: clamp(2px, 0.5vh, 6px);
+  justify-content: space-between;
+}
+.game-table-viewport > * { flex-shrink: 1; min-height: 0; }
+@media (orientation: portrait) {
+  .game-fullscreen-root::after {
+    content: "Rotate your phone to landscape";
+    position: fixed; inset: 0; z-index: 10000; display: flex; align-items: center;
+    justify-content: center; background: #09090b; color: #fbbf24;
+    font: 700 16px system-ui, sans-serif; letter-spacing: .04em;
+    text-align: center; pointer-events: none;
+  }
+}
